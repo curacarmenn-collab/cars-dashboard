@@ -2,8 +2,8 @@
 
 A simple Streamlit app for CIS 3590 that explores how a car's specifications relate to its price.
 
-- **GitHub repository:** _add link after publishing_
-- **Live app:** _add link after deploying_
+- **GitHub repository:** https://github.com/curacarmenn-collab/cars-dashboard
+- **Live app:** https://cars-dashboard-hetnawtmr2zvx8ueb26g3w.streamlit.app/
 
 ## Purpose
 

@@ -57,10 +57,11 @@ with data:
     if filtered_df.empty:
         st.warning("No cars match these filters. Try a wider price range.")
     else:
-        st.dataframe(filtered_df)
         st.caption("Filtered Data")
-        st.dataframe(filtered_df.describe())
+        st.dataframe(filtered_df)
         st.caption("Descriptive Statistics")
+        st.dataframe(filtered_df.describe())
+
 
 with chart:
     st.subheader("Scatter Plot")
