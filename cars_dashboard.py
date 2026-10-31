@@ -94,19 +94,11 @@ with insights:
     else:
         col1, col2, col3 = st.columns(3)
 
-        col1.metric(
-            "Cars",
-            len(filtered_df)
-        )
+        col1.metric("Cars",len(filtered_df))
 
-        col2.metric(
-            "Average Price",
-            f"${filtered_df['price'].mean():,.0f}"
-        )
+        col2.metric("Average Price",f"${filtered_df['price'].mean():,.0f}")
 
-        col3.metric(
-            "Average City MPG",
-            f"{filtered_df['citympg'].mean():.1f}")
+        col3.metric( "Average City MPG",f"{filtered_df['citympg'].mean():.1f}")
 
         expensive_car = filtered_df.loc[filtered_df["price"].idxmax()]
         st.write(f"The most expensive car shown is the "
