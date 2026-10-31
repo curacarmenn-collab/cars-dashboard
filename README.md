@@ -29,14 +29,14 @@ Things to know about the data:
 | --- | --- |
 | Overview | What the app does and the size of the dataset |
 | Data | The matching cars and their descriptive statistics |
-| Chart | An interactive scatter plot of a chosen parameter against price, colored by fuel type |
-| Insights | The number of cars, average price, average city MPG, the most expensive car, and the correlation between the chosen parameter and price |
+| Chart | An interactive scatter plot of two chosen parameters, colored by fuel type |
+| Insights | The number of cars, average price, average city MPG, the most expensive car, and the correlation between the two chosen parameters |
 
 Controls:
 
 - **Select a body style** (sidebar dropdown): show all cars or one body style.
 - **Select a price range** (sidebar slider): show cars within a price range.
-- **Select a parameter** (Chart tab dropdown): choose what to compare with price, which also updates the correlation in the Insights tab.
+- **Select a parameter for the X axis and Y axis** (Chart tab dropdowns): choose the two values to compare, which also updates the correlation in the Insights tab.
 
 Hover over a point on the chart to see that car's name and values. Click a fuel type in the legend to hide or show it. If no cars match the filters, the app shows a message asking for a wider price range.
 
@@ -93,17 +93,4 @@ This was a solo project built in small iterations. It used a prioritized task li
 
 The app needs no API keys or secrets. `cars.csv`, `cars_dashboard.py` and `requirements.txt` must all be in the same repository.
 
-**Publish to GitHub**
 
-1. Use a GitHub repository that you own, such as a fork of the course repository.
-2. Commit `cars_dashboard.py`, `requirements.txt`, `README.md`, `.gitignore` and `cars.csv`.
-3. Push the commit to your repository and add the link at the top of this file.
-
-**Deploy on Streamlit Community Cloud**
-
-1. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub.
-2. Click **Create app**, then choose the option for an app you already have.
-3. Choose your repository and the `main` branch.
-4. Set the main file path to `cars_dashboard.py`.
-5. Optionally choose an app URL, then click **Deploy**.
-6. Copy the public `streamlit.app` link and add it at the top of this file.

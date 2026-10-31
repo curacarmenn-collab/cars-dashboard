@@ -67,21 +67,25 @@ with data:
 with chart:
     st.subheader("Scatter Plot")
     st.write("Each point is one car. Hover over a point to see its details.")
-    parameter = st.selectbox("Select a parameter",
-                             options=["horsepower", "enginesize", "curbweight",
-                                      "citympg", "highwaympg"],
-                             format_func=lambda column: labels[column])
+    parameters = ["horsepower", "enginesize", "curbweight",
+                  "citympg", "highwaympg", "price"]
+    parameter_x = st.selectbox("Select a parameter for the X axis",options=parameters)
+    parameter_y = st.selectbox("Select a parameter for the Y axis",options=parameters,index=5) 
+
     if filtered_df.empty:
         st.warning("No cars match these filters. Try a wider price range.")
+    elif parameter_x == parameter_y:
+        st.info("Select two different parameters to compare.")
     else:
         fig1 = px.scatter(filtered_df,
-                          x=parameter,
-                          y="price",
+                          x=parameter_x,
+                          y=parameter_y,
                           color="fueltype",
                           hover_name="CarName",
                           labels=labels,
-                          title=f"{labels[parameter]} vs. Price")
+                          title=f"{labels[parameter_x]} vs. {labels[parameter_y]}")
         st.plotly_chart(fig1)
+    
 
 with insights:
     st.subheader("Insights")
@@ -108,17 +112,20 @@ with insights:
         st.write(f"The most expensive car shown is the "
                  f"{expensive_car['CarName']} at ${expensive_car['price']:,.0f}.")
 
-        correlation = filtered_df[parameter].corr(filtered_df["price"])
-        if len(filtered_df) < 3 or pd.isna(correlation):
+        correlation = filtered_df[parameter_x].corr(filtered_df[parameter_y])
+        if parameter_x == parameter_y:
+            st.write("Select two different parameters in the Chart tab to "
+                     "see how they relate.")
+        elif len(filtered_df) < 3 or pd.isna(correlation):
             st.write("There are not enough different cars here to compare "
-                     f"{labels[parameter]} and price.")
+                     f"{labels[parameter_x]} and {labels[parameter_y]}.")
         else:
             if correlation > 0:
                 direction = "tends to rise"
             else:
                 direction = "tends to fall"
-            st.write(f"For these cars, price {direction} as "
-                     f"{labels[parameter]} increases "
+            st.write(f"For these cars, {labels[parameter_y]} {direction} as "
+                     f"{labels[parameter_x]} increases "
                      f"(correlation: {correlation:.2f}).")
             st.caption("A correlation describes a pattern in this data. "
                        "It does not prove that one thing causes the other.")
