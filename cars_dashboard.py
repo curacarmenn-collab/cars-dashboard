@@ -5,6 +5,7 @@ import plotly.express as px
 
 st.title("Cars Dashboard")
 st.header("CIS 3590 - Internship-Ready Software Development")
+st.subheader("Carmen Cura")
 
 st.divider()
 
