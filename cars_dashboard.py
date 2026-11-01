@@ -1,6 +1,15 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px 
+from mellea import start_session, generative
+
+m = start_session()
+@generative
+def generate_insights(x_label, y_label, body_style, car_count, correlation):
+    """Write two sentenced for a general reader explainging what these statistics show about the relationship between the two paramters.
+    Do not claim coorelation proves causation. Use only the numbers provided. 
+    Do not make up any numbers!
+    """
 
 
 st.title("Cars Dashboard")
@@ -85,6 +94,20 @@ with chart:
                           labels=labels,
                           title=f"{labels[parameter_x]} vs. {labels[parameter_y]}")
         st.plotly_chart(fig1)
+        st.caption("A correlation describes a pattern in this data. It does not prove that one thing causes the other.")
+        if st.button("Generate Insights"):
+            correlation = filtered_df[parameter_x].corr(filtered_df[parameter_y])
+            with st.spinner("Generating insights. This can take a minute..."):
+                insights_text = generate_insights(m,
+                    x_label=labels[parameter_x],
+                    y_label=labels[parameter_y],
+                    body_style=body_style,
+                    car_count=len(filtered_df),
+                    correlation=correlation
+                )
+                st.subheader("Insights")
+                st.write(insights_text)
+            
     
 
 with insights:

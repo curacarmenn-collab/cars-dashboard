@@ -29,7 +29,7 @@ Things to know about the data:
 | --- | --- |
 | Overview | What the app does and the size of the dataset |
 | Data | The matching cars and their descriptive statistics |
-| Chart | An interactive scatter plot of two chosen parameters, colored by fuel type |
+| Chart | An interactive scatter plot of two chosen parameters, colored by fuel type with an optional AI-written insight based on the 2 parameters |
 | Insights | The number of cars, average price, average city MPG, the most expensive car, and the correlation between the two chosen parameters |
 
 Controls:
@@ -37,12 +37,15 @@ Controls:
 - **Select a body style** (sidebar dropdown): show all cars or one body style.
 - **Select a price range** (sidebar slider): show cars within a price range.
 - **Select a parameter for the X axis and Y axis** (Chart tab dropdowns): choose the two values to compare, which also updates the correlation in the Insights tab.
+- **Generate Insights** (Chart Button): Uses mellea to explain the correlation between the two parameters chosen. This can take a minute.
 
 Hover over a point on the chart to see that car's name and values. Click a fuel type in the legend to hide or show it. If no cars match the filters, the app shows a message asking for a wider price range.
 
 ## Running the App Locally
 
-You need Python 3 and pip. The app uses `streamlit`, `pandas` and `plotly`, which are listed in `requirements.txt`.
+You need Python 3 and pip. The app uses `streamlit`, `pandas`, `plotly`, and `mellea` which are listed in `requirements.txt`.
+
+The Generate Insights button also needs [Ollama](https://ollama.ai). Install it, open it, and download the model before you start the app:
 
 Run these commands from the folder that contains `cars.csv`, because the app loads the file with a relative path.
 
@@ -80,7 +83,8 @@ This was a solo project built in small iterations. It used a prioritized task li
 | 4 | Add insights | Values are calculated from the filtered cars | Done |
 | 5 | Handle empty and small results | No errors appear with zero or one matching car | Done |
 | 6 | Write the README and `requirements.txt` | The steps and dependencies match the app | Done |
-| 7 | Publish to GitHub and deploy | The live app opens from a public link | Not started |
+| 7 | Publish to GitHub and deploy | The live app opens from a public link | Done |
+| 8 | Add Mellea AI insights | The button returns a short explanation for the selected parameters and filters | Done |
 
 **How the work was done**
 
