@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px 
 from mellea import start_session, generative
 
-m = start_session()
 @generative
 def generate_insights(x_label, y_label, body_style, car_count, correlation):
     """Write two sentenced for a general reader explainging what these statistics show about the relationship between the two paramters.
@@ -97,17 +96,21 @@ with chart:
         st.caption("A correlation describes a pattern in this data. It does not prove that one thing causes the other.")
         if st.button("Generate Insights"):
             correlation = filtered_df[parameter_x].corr(filtered_df[parameter_y])
-            with st.spinner("Generating insights. This can take a minute..."):
-                insights_text = generate_insights(m,
-                    x_label=labels[parameter_x],
-                    y_label=labels[parameter_y],
-                    body_style=body_style,
-                    car_count=len(filtered_df),
-                    correlation=correlation
-                )
-                st.subheader("Insights")
-                st.write(insights_text)
-            
+            try:
+                m = start_session()
+                with st.spinner("Generating insights. This can take a minute..."):
+                    insights_text = generate_insights(m,
+                        x_label=labels[parameter_x],
+                        y_label=labels[parameter_y],
+                        body_style=body_style,
+                        car_count=len(filtered_df),
+                        correlation=correlation
+                    )
+                    st.subheader("Insights")
+                    st.write(insights_text)
+            except ConnectionError:
+                st.warning("AI insights only work when the app runs on a "
+                           "computer with Ollama.")
     
 
 with insights:
